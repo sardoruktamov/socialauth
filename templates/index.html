@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div class="container">
-    {% if user.is_authenticated %}
-    <h1>welcome {{ request.user.uservane }}</h1>
-    {% else %}
-            <h1>welcome AnonumUser</h1>
+{% extends 'base.html' %}
+{% load socialaccount %}
 
-    {% endif %}
-</div>
-</body>
-</html>
+
+
+
+{% block title %} Login {% endblock %}
+
+
+
+
+{% block body %}
+  <h1>My Google Login Project1</h1>
+  {% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }} !</p>
+
+  {% else %}
+  <h1>My Google Login Project2</h1>
+  <a href="{% provider_login_url 'google' %}">Login with Google</a>
+      <li><a href="{% url 'social:begin' 'facebook' %}">Signin With Facebook</a> </li>
+  {% endif %}
+{% endblock %}
